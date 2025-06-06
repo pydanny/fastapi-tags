@@ -3,6 +3,7 @@ from typing import Any
 
 from fastapi import Response
 
+
 class FTResponse(Response):
     """Custom response class to handle Fastcore responses with fastcore FastTags."""
 

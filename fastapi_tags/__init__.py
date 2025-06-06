@@ -1,8 +1,8 @@
 """Extension for FastAPI to make fasttags easier to use."""
 
 from .tags import FTResponse as FTResponse
-from .tags import fasttag_wrapper as fasttag_wrapper
 from fastcore.xml import (
+    Html,  # noqa: F401
     Head,  # noqa: F401
     Title,  # noqa: F401
     Meta,  # noqa: F401
@@ -87,4 +87,4 @@ from fastcore.xml import (
     Slot,  # noqa: F401
 )
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
