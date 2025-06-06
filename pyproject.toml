@@ -18,6 +18,9 @@ dev = [
     "ruff>=0.11.13",
 ]
 
+[project.urls]
+homepage = "https://github.com/pydanny/fastapi-tags"
+bugs = "https://github.com/pydanny/fastapi-tags/issues"
 
 [tool.mypy]
 # required as fastcore is not fully typed
