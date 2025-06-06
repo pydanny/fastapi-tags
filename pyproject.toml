@@ -1,7 +1,7 @@
 [project]
 name = "fastapi-tags"
 version = "0.1.0"
-description = "Add your description here"
+description = "Adds fastcore fast tags to FastAPI views"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
@@ -16,3 +16,8 @@ dev = [
     "pytest>=8.4.0",
     "ruff>=0.11.13",
 ]
+
+
+[tool.mypy]
+# required as fastcore is not fully typed
+disable_error_code = ["import-untyped"]

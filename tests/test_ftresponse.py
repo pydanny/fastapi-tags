@@ -11,11 +11,11 @@ def test_ftresponse():
 
     @app.get("/test")
     def test_endpoint():
-        return FTResponse(ft.H1('Hello, World!'))
+        return FTResponse(ft.H1("Hello, World!"))
 
     client = TestClient(app)
     response = client.get("/test")
-    
+
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert response.text == '<h1>Hello, World!</h1>\n'
+    assert response.text == "<h1>Hello, World!</h1>\n"

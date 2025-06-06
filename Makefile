@@ -1,6 +1,7 @@
 clean:
 	ruff format .
 	ruff check . --fix
+	mypy .
 
 MAKECMDGOALS ?= .	
 
