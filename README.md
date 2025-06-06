@@ -1,5 +1,11 @@
 # FastAPI Tags
 
+Install the package:
+
+```bash
+uv add fastapi-tags
+```
+
 Usage:
 
 ```python
@@ -11,5 +17,5 @@ app = FastAPI()
 
 @app.get("/", response_class=FTResponse)
 async def index():
-    return FTResponse(ft.Html(ft.H1("About Feldroy", style="color: blue;")))
+    return FTResponse(ft.Html(ft.H1("Hello, world!", style="color: blue;")))
 ```

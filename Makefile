@@ -22,6 +22,7 @@ coverage:
 	@:	
 
 build:
+	rm -rf dist
 	uv build
 
 publish:
