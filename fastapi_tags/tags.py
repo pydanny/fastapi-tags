@@ -7,16 +7,8 @@ from fastapi import Response
 class FTResponse(Response):
     """Custom response class to handle Fastcore XML responses."""
 
-    media_type = "text/html"
+    media_type = "text/html; charset=utf-8"
 
     def render(self, content: Any) -> bytes:
         """Render the Fastcore XML element to a string."""
-        return ft.to_xml(content)
-
-
-def main():
-    print("Hello from fastapi-tags!")
-
-
-if __name__ == "__main__":
-    main()
+        return ft.to_xml(content).encode("utf-8")
