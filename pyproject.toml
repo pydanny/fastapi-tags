@@ -1,6 +1,6 @@
 [project]
 name = "fastapi-tags"
-version = "0.1.1"
+version = "0.1.2"
 description = "Adds fastcore fast tags to FastAPI views"
 readme = "README.md"
 requires-python = ">=3.13"
