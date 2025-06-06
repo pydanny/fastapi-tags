@@ -26,7 +26,8 @@ build:
 	uv build
 
 publish:
-	uv publish -t $UV_PUBLISH_TOKEN
+	@echo "Simplest way is to run:\n"
+	@echo "  uv publish -t $UV_PUBLISH_TOKEN"
 
 VERSION=v$(shell grep -m 1 version pyproject.toml | tr -s ' ' | tr -d '"' | tr -d "'" | cut -d' ' -f3)
 
