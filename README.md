@@ -10,12 +10,11 @@ Usage:
 
 ```python
 from fastapi import FastAPI
-from fastapi_tags.tags import FTResponse
-from fastcore import xml as ft
+import fastapi_tags as ft
 
 app = FastAPI()
 
 @app.get("/", response_class=FTResponse)
 async def index():
-    return FTResponse(ft.Html(ft.H1("Hello, world!", style="color: blue;")))
+    return ft.FTResponse(ft.Html(ft.H1("Hello, world!", style="color: blue;")))
 ```
