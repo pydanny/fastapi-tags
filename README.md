@@ -10,7 +10,7 @@ Usage:
 
 ```python
 from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
+from fastapi_tags.tags import FTResponse
 from fastcore import xml as ft
 
 app = FastAPI()
