@@ -16,5 +16,5 @@ app = FastAPI()
 
 @app.get("/", response_class=FTResponse)
 async def index():
-    return ft.FTResponse(ft.Html(ft.H1("Hello, world!", style="color: blue;")))
+    return ft.Html(ft.H1("Hello, world!", style="color: blue;"))
 ```
