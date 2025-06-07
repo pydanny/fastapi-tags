@@ -2,6 +2,19 @@
 
 Adds fastcore fast tags to FastAPI views.
 
+
+<p align="center">
+<a href="https://github.com/pydanny/fastapi-tags/actions?query=workflow%3Apython-package+event%3Apush+branch%main" target="_blank">
+    <img src="https://github.com/pydanny/fastapi-tags/actions/workflows/python-package.yml/badge.svg?event=push&branch=main" alt="Test">
+</a>
+<a href="https://pypi.org/project/fastapi-tags" target="_blank">
+    <img src="https://img.shields.io/pypi/v/fastapi-tags?color=%2334D058&label=pypi%20package" alt="Package version">
+</a>
+<a href="https://pypi.org/project/fastapi-tags" target="_blank">
+    <img src="https://img.shields.io/pypi/pyversions/fastapi-tags.svg?color=%2334D058" alt="Supported Python versions">
+</a>
+</p>
+
 Install the package:
 
 ```bash
