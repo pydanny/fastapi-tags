@@ -2,6 +2,13 @@ clean:
 	ruff format .
 	ruff check . --fix
 	mypy .
+	pytest .
+
+fail:
+	ruff format . --check
+	ruff check .
+	pytest .	
+	mypy .
 
 MAKECMDGOALS ?= .	
 

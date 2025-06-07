@@ -1,5 +1,7 @@
 # FastAPI Tags
 
+Adds fastcore fast tags to FastAPI views.
+
 Install the package:
 
 ```bash

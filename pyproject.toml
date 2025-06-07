@@ -3,7 +3,7 @@ name = "fastapi-tags"
 version = "0.1.5"
 description = "Adds fastcore fast tags to FastAPI views"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.9"
 dependencies = [
     "fastapi>=0.115.12",
     "fastcore>=1.8.2",
