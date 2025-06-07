@@ -12,8 +12,6 @@ def dict_to_ft_component(d):
     children = tuple(
         dict_to_ft_component(c) if isinstance(c, dict) else (c,) for c in children_raw
     )
-    # if d['tag'] == '!doctype':
-    #     return
     return ft.ft(d["tag"], *children, **d.get("attrs", {}))
 
 

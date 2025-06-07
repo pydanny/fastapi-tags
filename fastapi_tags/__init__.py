@@ -1,6 +1,6 @@
 """Extension for FastAPI to make fasttags easier to use."""
 
-from .tags import FTResponse as FTResponse
+from .core import FTResponse as FTResponse
 from fastcore.xml import (
     Html,  # noqa: F401
     Head,  # noqa: F401
