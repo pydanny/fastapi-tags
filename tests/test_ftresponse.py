@@ -43,6 +43,7 @@ def test_ftresponse_type():
         == "<main>  <h1>Hello, clean HTML response!</h1>\n  <p>This is a paragraph in the response.</p>\n</main>"
     )
 
+
 def test_ftresponse_html():
     """Test the FTResponse class."""
     import fastapi_tags as ft
@@ -51,10 +52,12 @@ def test_ftresponse_html():
 
     @app.get("/test", response_class=ft.FTResponse)
     def test_endpoint():
-        return ft.Html(ft.Main(
-            ft.H1("Hello, clean HTML response!"),
-            ft.P("This is a paragraph in the response."),
-        ))
+        return ft.Html(
+            ft.Main(
+                ft.H1("Hello, clean HTML response!"),
+                ft.P("This is a paragraph in the response."),
+            )
+        )
 
     client = TestClient(app)
     response = client.get("/test")

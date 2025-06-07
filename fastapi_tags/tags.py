@@ -13,7 +13,7 @@ def dict_to_ft_component(d):
         dict_to_ft_component(c) if isinstance(c, dict) else (c,) for c in children_raw
     )
     # if d['tag'] == '!doctype':
-    #     return 
+    #     return
     return ft.ft(d["tag"], *children, **d.get("attrs", {}))
 
 
@@ -26,10 +26,11 @@ class FTResponse(Response):
         """Render the Fastcore XML element to a string."""
         html = False
         if isinstance(content, list):
-            if content[0]['tag'] == '!doctype':
+            if content[0]["tag"] == "!doctype":
                 html = True
             content = content[1]
         if isinstance(content, dict):
             content = dict_to_ft_component(content)
-        if html: content = ft.Html(content)
+        if html:
+            content = ft.Html(content)
         return ft.to_xml(content).encode("utf-8")
