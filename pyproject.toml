@@ -1,12 +1,11 @@
 [project]
 name = "fastapi-tags"
 version = "0.1.6"
-description = "Adds fastcore fast tags to FastAPI views"
+description = "Adds s-expression HTML tags (FTags) to FastAPI views. Inspired by FastHTML's use of fastcore's FT components."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = [
     "fastapi>=0.115.12",
-    "fastcore>=1.8.2",
 ]
 classifiers = [
     "Operating System :: OS Independent",
@@ -24,7 +23,6 @@ classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
@@ -46,6 +44,4 @@ homepage = "https://github.com/pydanny/fastapi-tags"
 bugs = "https://github.com/pydanny/fastapi-tags/issues"
 
 [tool.mypy]
-# required as fastcore is not fully typed
-disable_error_code = ["import-untyped"]
 exclude = "^build/"

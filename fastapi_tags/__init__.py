@@ -1,90 +1,93 @@
 """Extension for FastAPI to make fasttags easier to use."""
 
 from .core import FTResponse as FTResponse
-from fastcore.xml import (
-    Html,  # noqa: F401
-    Head,  # noqa: F401
-    Title,  # noqa: F401
-    Meta,  # noqa: F401
-    Link,  # noqa: F401
-    Style,  # noqa: F401
-    Body,  # noqa: F401
-    Pre,  # noqa: F401
-    Code,  # noqa: F401
-    Div,  # noqa: F401
-    Span,  # noqa: F401
-    P,  # noqa: F401
-    H1,  # noqa: F401
-    H2,  # noqa: F401
-    H3,  # noqa: F401
-    H4,  # noqa: F401
-    H5,  # noqa: F401
-    H6,  # noqa: F401
-    Strong,  # noqa: F401
-    Em,  # noqa: F401
-    B,  # noqa: F401
-    I,  # noqa: F401
-    U,  # noqa: F401
-    S,  # noqa: F401
-    Strike,  # noqa: F401
-    Sub,  # noqa: F401
-    Sup,  # noqa: F401
-    Hr,  # noqa: F401
-    Br,  # noqa: F401
-    Img,  # noqa: F401
-    A,  # noqa: F401
-    Nav,  # noqa: F401
-    Ul,  # noqa: F401
-    Ol,  # noqa: F401
-    Li,  # noqa: F401
-    Dl,  # noqa: F401
-    Dt,  # noqa: F401
-    Dd,  # noqa: F401
-    Table,  # noqa: F401
-    Thead,  # noqa: F401
-    Tbody,  # noqa: F401
-    Tfoot,  # noqa: F401
-    Tr,  # noqa: F401
-    Th,  # noqa: F401
-    Td,  # noqa: F401
-    Caption,  # noqa: F401
-    Col,  # noqa: F401
-    Colgroup,  # noqa: F401
-    Form,  # noqa: F401
-    Input,  # noqa: F401
-    Textarea,  # noqa: F401
-    Button,  # noqa: F401
-    Select,  # noqa: F401
-    Option,  # noqa: F401
-    Label,  # noqa: F401
-    Fieldset,  # noqa: F401
-    Legend,  # noqa: F401
-    Details,  # noqa: F401
-    Summary,  # noqa: F401
-    Main,  # noqa: F401
-    Header,  # noqa: F401
-    Footer,  # noqa: F401
-    Section,  # noqa: F401
-    Article,  # noqa: F401
-    Aside,  # noqa: F401
-    Figure,  # noqa: F401
-    Figcaption,  # noqa: F401
-    Mark,  # noqa: F401
-    Small,  # noqa: F401
-    Iframe,  # noqa: F401
-    Object,  # noqa: F401
-    Embed,  # noqa: F401
-    Param,  # noqa: F401
-    Video,  # noqa: F401
-    Audio,  # noqa: F401
-    Source,  # noqa: F401
-    Canvas,  # noqa: F401
-    Svg,  # noqa: F401
-    Math,  # noqa: F401
-    Script,  # noqa: F401
-    Noscript,  # noqa: F401
-    Template,  # noqa: F401
-    Slot,  # noqa: F401
+from .tags import FTag as FTag
+from .tags import (
+    A as A,
+    Article as Article,
+    Aside as Aside,
+    Audio as Audio,
+    B as B,
+    Block as Block,
+    Body as Body,
+    Br as Br,
+    Button as Button,
+    Canvas as Canvas,
+    Caption as Caption,
+    Code as Code,
+    Col as Col,
+    Colgroup as Colgroup,
+    Dd as Dd,
+    Details as Details,
+    Div as Div,
+    Dl as Dl,
+    Dt as Dt,
+    Em as Em,
+    Embed as Embed,
+    Fieldset as Fieldset,
+    Figcaption as Figcaption,
+    Figure as Figure,
+    Footer as Footer,
+    Form as Form,
+    H1 as H1,
+    H2 as H2,
+    H3 as H3,
+    H4 as H4,
+    H5 as H5,
+    H6 as H6,
+    Head as Head,
+    Header as Header,
+    Hr as Hr,
+    Html as Html,
+    I as I,
+    Iframe as Iframe,
+    Img as Img,
+    Input as Input,
+    Label as Label,
+    Legend as Legend,
+    Li as Li,
+    Link as Link,
+    Main as Main,
+    Mark as Mark,
+    Math as Math,
+    Meta as Meta,
+    Nav as Nav,
+    Noscript as Noscript,
+    Object as Object,
+    Ol as Ol,
+    Option as Option,
+    P as P,
+    Param as Param,
+    Pre as Pre,
+    S as S,
+    Script as Script,
+    Section as Section,
+    Select as Select,
+    Slot as Slot,
+    Small as Small,
+    Source as Source,
+    Span as Span,
+    Strike as Strike,
+    Strong as Strong,
+    Style as Style,
+    Sub as Sub,
+    Summary as Summary,
+    Sup as Sup,
+    Svg as Svg,
+    Table as Table,
+    Tbody as Tbody,
+    Td as Td,
+    Template as Template,
+    Textarea as Textarea,
+    Tfoot as Tfoot,
+    Th as Th,
+    Thead as Thead,
+    Title as Title,
+    Tr as Tr,
+    U as U,
+    Ul as Ul,
+    Video as Video,
 )
+
 
 __version__ = "0.1.6"
