@@ -1,3 +1,6 @@
+from functools import cached_property
+
+
 def _fix_k(k):
     # This function originated in fastcore.
     return k if k == "_" else k.lstrip("_").replace("_", "-")
@@ -27,27 +30,33 @@ def attrmap(o):
 
 class FTag:
     def __init__(self, *children, **kwargs):
-        self.children, self.attrs = children, kwargs
+        """Sets three attributes, tag, children, and attrs.
+        These are important for Starlette view responses, as nested objects
+        get auto-serialized to JSON and need to be rebuilt. Without
+        the values of these attributes, the object reconstruction can't occur"""
         self.tag = self.__class__.__name__.lower()
+        self._children, self._attrs = children, kwargs
 
-    def _stringify_attrs(self) -> str:
-        if not self.attrs:
+    @property
+    def attrs(self) -> str:
+        if not self._attrs:
             return ""
-        return " " + " ".join(f'{attrmap(k)}="{v}"' for k, v in self.attrs.items())
+        return " " + " ".join(f'{attrmap(k)}="{v}"' for k, v in self._attrs.items())
 
-    def _get_children(self):
-        if isinstance(self.children, str | FTag):
-            return self.children
-        elif len(self.children) and isinstance(self.children[0], tuple):
+    @cached_property
+    def children(self):
+        if isinstance(self._children, str | FTag):
+            return self._children
+        elif len(self._children) and isinstance(self._children[0], tuple):
             return "".join(
-                [c.render() if isinstance(c, FTag) else c for c in self.children[0]]
+                [c.render() if isinstance(c, FTag) else c for c in self._children[0]]
             )
         return "".join(
-            [c.render() if isinstance(c, FTag) else c for c in self.children]
+            [c.render() if isinstance(c, FTag) else c for c in self._children]
         )
 
     def render(self) -> str:
-        return f"<{self.tag}{self._stringify_attrs()}>{self._get_children()}</{self.tag}>\n"
+        return f"<{self.tag}{self.attrs}>{self.children}</{self.tag}>\n"
 
 
 # Special tags
@@ -55,7 +64,7 @@ class FTag:
 
 class Html(FTag):
     def render(self) -> str:
-        return f"<!doctype html><html>{self._stringify_attrs()}>{self._get_children()}</html>"
+        return f"<!doctype html><html>{self.attrs}>{self.children}</html>"
 
 
 # Stock tags

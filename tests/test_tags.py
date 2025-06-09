@@ -49,3 +49,11 @@ def test_tag_types():
     assert issubclass(ft.A, ft.FTag)
     assert issubclass(ft.Div, ft.FTag)
     assert issubclass(ft.P, ft.FTag)
+
+
+def test_subclassing():
+    class AwesomeP(ft.P):
+        def render(self) -> str:
+            return f"<p{self.attrs}>AWESOME {self.children}!</p>"
+
+    assert AwesomeP("library").render() == "<p>AWESOME library!</p>"
