@@ -1,6 +1,6 @@
-from fastcore import xml as ft
-from typing import Any
-
+from . import tags
+from typing import Any, Mapping
+from starlette.background import BackgroundTask
 from fastapi import Response
 
 
@@ -20,15 +20,43 @@ class FTResponse(Response):
 
     media_type = "text/html; charset=utf-8"
 
+    # def render(self, content: Any) -> bytes:
+    #     """Render the Fastcore XML element to a string."""
+    #     html = False
+    #     if isinstance(content, list):
+    #         if content[0]["tag"] == "!doctype":
+    #             html = True
+    #         content = content[1]
+    #     if isinstance(content, dict):
+    #         content = dict_to_ft_component(content)
+    #     if html:
+    #         content = ft.Html(content)
+    #     return ft.to_xml(content).encode("utf-8")
+
+    def __init__(
+        self,
+        content: Any = None,
+        status_code: int = 200,
+        headers: Mapping[str, str] | None = None,
+        media_type: str | None = None,
+        background: BackgroundTask | None = None,
+    ) -> None:
+        
+        super().__init__(        content,
+            status_code,
+            headers,
+            media_type,
+            background)
+
     def render(self, content: Any) -> bytes:
-        """Render the Fastcore XML element to a string."""
+        """Render the FTs to a bytes of html."""
         html = False
-        if isinstance(content, list):
-            if content[0]["tag"] == "!doctype":
-                html = True
-            content = content[1]
-        if isinstance(content, dict):
-            content = dict_to_ft_component(content)
-        if html:
-            content = ft.Html(content)
-        return ft.to_xml(content).encode("utf-8")
+        # if isinstance(content, list):
+        #     if content[0]["tag"] == "!doctype":
+        #         html = True
+        #     content = content[1]
+        # if isinstance(content, dict):
+        #     content = dict_to_ft_component(content)
+        # if html:
+        #     content = ft.Html(content)
+        return content.render().encode("utf-8")

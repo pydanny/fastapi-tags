@@ -33,6 +33,17 @@ class FTag:
         if not self.attrs:
             return ""
         return " " + " ".join(f'{attrmap(k)}="{v}"' for k, v in self.attrs.items())
+    
+    # def to_dict(self):
+    #     base = self.__dict__.copy()
+    #     base['tag'] = self.__class__.__name__.lower()
+    #     return base        
+
+    # def dict(self):
+    #     base = self.__dict__.copy()
+    #     base['tag'] = self.__class__.__name__.lower()
+    #     return base        
+
 
     def render(self) -> str:
         tag = self.__class__.__name__.lower()
@@ -42,8 +53,15 @@ class FTag:
             children = "".join(
                 [c.render() if isinstance(c, FTag) else c for c in self.children]
             )
-        return f"<{tag}{self._stringify_attrs()}>{children}</{tag}>"
+        return f"<{tag}{self._stringify_attrs()}>{children}</{tag}>\n"
 
+# Special tags
+
+class Html(FTag):
+    def render(self) -> str:
+        return f" <!doctype html><html>{self._stringify_attrs()}>{children}</html>"
+
+# Stock tags
 
 class A(FTag):
     pass
@@ -183,11 +201,6 @@ class Header(FTag):
 
 class Hr(FTag):
     pass
-
-
-class Html(FTag):
-    pass
-
 
 class I(FTag):  # noqa: E742
     pass
