@@ -34,8 +34,12 @@ class FTag:
         These are important for Starlette view responses, as nested objects
         get auto-serialized to JSON and need to be rebuilt. Without
         the values of these attributes, the object reconstruction can't occur"""
-        self.tag = self.__class__.__name__.lower()
+        self._tag = self.__class__.__name__
         self._children, self._attrs = children, kwargs
+
+    @property
+    def tag(self) -> str:
+        return self._tag.lower()       
 
     @property
     def attrs(self) -> str:

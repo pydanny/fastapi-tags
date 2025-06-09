@@ -11,7 +11,7 @@ def dict_to_ft_component(d):
     children = tuple(
         dict_to_ft_component(c) if isinstance(c, dict) else (c,) for c in children_raw
     )
-    obj = getattr(tags, d["tag"].title())
+    obj = getattr(tags, d["_tag"].title())
     return obj(*children, **d.get("_attrs", {}))
 
 

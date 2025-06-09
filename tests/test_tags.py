@@ -57,3 +57,11 @@ def test_subclassing():
             return f"<p{self.attrs}>AWESOME {self.children}!</p>"
 
     assert AwesomeP("library").render() == "<p>AWESOME library!</p>"
+
+def test_subclassing_nested():
+    class AwesomeP(ft.P):
+        def render(self) -> str:
+            return f"<p{self.attrs}>AWESOME {self.children}!</p>"
+
+    html = ft.Div(AwesomeP("library")).render()
+    assert html == "<div><p>AWESOME library!</p></div>\n"
