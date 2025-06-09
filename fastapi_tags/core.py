@@ -16,12 +16,12 @@ def dict_to_ft_component(d):
 
 
 class FTResponse(Response):
-    """Custom response class to handle Fastcore responses with fastcore FastTags."""
+    """Custom response class to handle FTags."""
 
     media_type = "text/html; charset=utf-8"
 
     def render(self, content: Any) -> bytes:
-        """Render the Fastcore XML element to a string."""
+        """Render FTag elements to bytes of HTML."""
         if isinstance(content, dict):
             content = dict_to_ft_component(content)
         return content.render().encode("utf-8")

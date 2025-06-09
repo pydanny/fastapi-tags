@@ -1,6 +1,6 @@
 # FastAPI Tags
 
-Adds fastcore fast tags to FastAPI views.
+Adds s-expression HTML tags (FTags) to FastAPI views. Inspired by FastHTML's use of fastcore's FT components.
 
 
 <p align="center">
