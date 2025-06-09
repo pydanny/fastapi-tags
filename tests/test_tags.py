@@ -49,5 +49,3 @@ def test_tag_types():
     assert issubclass(ft.A, ft.FTag)
     assert issubclass(ft.Div, ft.FTag)
     assert issubclass(ft.P, ft.FTag)
-
-

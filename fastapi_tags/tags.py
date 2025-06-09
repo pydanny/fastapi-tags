@@ -28,40 +28,38 @@ def attrmap(o):
 class FTag:
     def __init__(self, *children, **kwargs):
         self.children, self.attrs = children, kwargs
+        self.tag = self.__class__.__name__.lower()
 
     def _stringify_attrs(self) -> str:
         if not self.attrs:
             return ""
         return " " + " ".join(f'{attrmap(k)}="{v}"' for k, v in self.attrs.items())
-    
-    # def to_dict(self):
-    #     base = self.__dict__.copy()
-    #     base['tag'] = self.__class__.__name__.lower()
-    #     return base        
 
-    # def dict(self):
-    #     base = self.__dict__.copy()
-    #     base['tag'] = self.__class__.__name__.lower()
-    #     return base        
-
+    def _get_children(self):
+        if isinstance(self.children, str | FTag):
+            return self.children
+        elif len(self.children) and isinstance(self.children[0], tuple):
+            return "".join(
+                [c.render() if isinstance(c, FTag) else c for c in self.children[0]]
+            )
+        return "".join(
+            [c.render() if isinstance(c, FTag) else c for c in self.children]
+        )
 
     def render(self) -> str:
-        tag = self.__class__.__name__.lower()
-        if isinstance(self.children, str):
-            children = self.children
-        else:
-            children = "".join(
-                [c.render() if isinstance(c, FTag) else c for c in self.children]
-            )
-        return f"<{tag}{self._stringify_attrs()}>{children}</{tag}>\n"
+        return f"<{self.tag}{self._stringify_attrs()}>{self._get_children()}</{self.tag}>\n"
+
 
 # Special tags
 
+
 class Html(FTag):
     def render(self) -> str:
-        return f" <!doctype html><html>{self._stringify_attrs()}>{children}</html>"
+        return f"<!doctype html><html>{self._stringify_attrs()}>{self._get_children()}</html>"
+
 
 # Stock tags
+
 
 class A(FTag):
     pass
@@ -201,6 +199,7 @@ class Header(FTag):
 
 class Hr(FTag):
     pass
+
 
 class I(FTag):  # noqa: E742
     pass
