@@ -15,13 +15,23 @@ Adds s-expression HTML tags (FTags) to FastAPI views. Inspired by FastHTML's use
 </a>
 </p>
 
-Install the package:
+## Installation:
+
+uv:
 
 ```bash
 uv add fastapi-tags
 ```
 
-Usage:
+pip:
+
+```bash
+pip install fastapi-tags
+uv pip install fastapi-tags
+```
+
+
+# Usage:
 
 ```python
 from fastapi import FastAPI
@@ -40,4 +50,16 @@ If you want to do snippets, just skip the `ft.Html` tag:
 @app.get("/time", response_class=ft.FTResponse)
 async def time():
     return ft.P("Time to do code!")
+```
+
+# Subclassing
+
+```python
+class AwesomeP(ft.P):
+    def render(self) -> str:
+        return f"<p{self.attrs}>AWESOME {self.children}!</p>"
+```
+
+```html
+<p>AWESOME library!</p>
 ```

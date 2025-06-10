@@ -1,18 +1,19 @@
-from . import tags
+import importlib
 from typing import Any
 from fastapi import Response
 
 
 def dict_to_ft_component(d):
-    children_raw = d.get("children", ())
+    children_raw = d.get("_children", ())
     if isinstance(children_raw, str):
         children_raw = (children_raw,)
-    # Ensure children is always a tuple
     children = tuple(
-        dict_to_ft_component(c) if isinstance(c, dict) else (c,) for c in children_raw
+        dict_to_ft_component(c) if isinstance(c, dict) else c for c in children_raw
     )
-    obj = getattr(tags, d["tag"].title())
-    return obj(*children, **d.get("attrs", {}))
+    # TODO: cache this somehow
+    module = importlib.import_module(d["_module"])
+    obj = getattr(module, d["_tag"])
+    return obj(*children, **d.get("_attrs", {}))
 
 
 class FTResponse(Response):

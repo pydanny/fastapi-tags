@@ -17,7 +17,7 @@ def test_ftresponse_obj():
 
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert response.text == "<h1>Hello, World!</h1>\n"
+    assert response.text == "<h1>Hello, World!</h1>"
 
 
 def test_ftresponse_type():
@@ -40,7 +40,7 @@ def test_ftresponse_type():
     assert response.headers["content-type"] == "text/html; charset=utf-8"
     assert (
         response.text
-        == "<main><h1>Hello, clean HTML response!</h1>\n<p>This is a paragraph in the response.</p>\n</main>\n"
+        == "<main><h1>Hello, clean HTML response!</h1><p>This is a paragraph in the response.</p></main>"
     )
 
 
@@ -66,5 +66,24 @@ def test_ftresponse_html():
     assert response.headers["content-type"] == "text/html; charset=utf-8"
     assert (
         response.text
-        == "<!doctype html><html>><main><h1>Hello, clean HTML response!</h1>\n<p>This is a paragraph in the response.</p>\n</main>\n</html>"
+        == "<!doctype html><html><main><h1>Hello, clean HTML response!</h1><p>This is a paragraph in the response.</p></main></html>"
+    )
+
+
+def test_strings_and_ft_children():
+    import fastapi_tags as ft
+
+    app = FastAPI()
+
+    @app.get("/test", response_class=ft.FTResponse)
+    def test_endpoint():
+        return ft.Html(ft.P("This isn't a ", ft.Strong("cut off"), " sentence"))
+
+    client = TestClient(app)
+    response = client.get("/test")
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert (
+        response.text
+        == "<!doctype html><html><p>This isn't a <strong>cut off</strong> sentence</p></html>"
     )
