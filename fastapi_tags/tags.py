@@ -52,11 +52,6 @@ class FTag:
     def children(self):
         if isinstance(self._children, str | FTag):
             return self._children
-        elif len(self._children) and isinstance(self._children[0], tuple):
-            # TODO: If we don't force a tuple in core.FTResponse, check if this is necessary
-            return "".join(
-                [c.render() if isinstance(c, FTag) else c for c in self._children[0]]
-            )
         return "".join(
             [c.render() if isinstance(c, FTag) else c for c in self._children]
         )
