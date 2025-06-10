@@ -35,11 +35,12 @@ class FTag:
         get auto-serialized to JSON and need to be rebuilt. Without
         the values of these attributes, the object reconstruction can't occur"""
         self._tag = self.__class__.__name__
+        self._module = self.__class__.__module__
         self._children, self._attrs = children, kwargs
 
     @property
     def tag(self) -> str:
-        return self._tag.lower()       
+        return self._tag.lower()
 
     @property
     def attrs(self) -> str:
@@ -52,6 +53,7 @@ class FTag:
         if isinstance(self._children, str | FTag):
             return self._children
         elif len(self._children) and isinstance(self._children[0], tuple):
+            # TODO: If we don't force a tuple in core.FTResponse, check if this is necessary
             return "".join(
                 [c.render() if isinstance(c, FTag) else c for c in self._children[0]]
             )
@@ -68,7 +70,7 @@ class FTag:
 
 class Html(FTag):
     def render(self) -> str:
-        return f"<!doctype html><html>{self.attrs}>{self.children}</html>"
+        return f"<!doctype html><html{self.attrs}>{self.children}</html>"
 
 
 # Stock tags

@@ -58,6 +58,7 @@ def test_subclassing():
 
     assert AwesomeP("library").render() == "<p>AWESOME library!</p>"
 
+
 def test_subclassing_nested():
     class AwesomeP(ft.P):
         def render(self) -> str:

@@ -66,5 +66,5 @@ def test_ftresponse_html():
     assert response.headers["content-type"] == "text/html; charset=utf-8"
     assert (
         response.text
-        == "<!doctype html><html>><main><h1>Hello, clean HTML response!</h1>\n<p>This is a paragraph in the response.</p>\n</main>\n</html>"
+        == "<!doctype html><html><main><h1>Hello, clean HTML response!</h1>\n<p>This is a paragraph in the response.</p>\n</main>\n</html>"
     )

@@ -1,4 +1,4 @@
-from . import tags
+import importlib
 from typing import Any
 from fastapi import Response
 
@@ -11,7 +11,9 @@ def dict_to_ft_component(d):
     children = tuple(
         dict_to_ft_component(c) if isinstance(c, dict) else (c,) for c in children_raw
     )
-    obj = getattr(tags, d["_tag"].title())
+    # TODO: cache this somehow
+    module = importlib.import_module(d["_module"])
+    obj = getattr(module, d["_tag"])
     return obj(*children, **d.get("_attrs", {}))
 
 
