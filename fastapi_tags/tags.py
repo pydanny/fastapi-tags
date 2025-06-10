@@ -62,7 +62,7 @@ class FTag:
         )
 
     def render(self) -> str:
-        return f"<{self.tag}{self.attrs}>{self.children}</{self.tag}>\n"
+        return f"<{self.tag}{self.attrs}>{self.children}</{self.tag}>"
 
 
 # Special tags

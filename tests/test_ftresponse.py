@@ -17,7 +17,7 @@ def test_ftresponse_obj():
 
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert response.text == "<h1>Hello, World!</h1>\n"
+    assert response.text == "<h1>Hello, World!</h1>"
 
 
 def test_ftresponse_type():
@@ -40,7 +40,7 @@ def test_ftresponse_type():
     assert response.headers["content-type"] == "text/html; charset=utf-8"
     assert (
         response.text
-        == "<main><h1>Hello, clean HTML response!</h1>\n<p>This is a paragraph in the response.</p>\n</main>\n"
+        == "<main><h1>Hello, clean HTML response!</h1><p>This is a paragraph in the response.</p></main>"
     )
 
 
@@ -66,5 +66,5 @@ def test_ftresponse_html():
     assert response.headers["content-type"] == "text/html; charset=utf-8"
     assert (
         response.text
-        == "<!doctype html><html><main><h1>Hello, clean HTML response!</h1>\n<p>This is a paragraph in the response.</p>\n</main>\n</html>"
+        == "<!doctype html><html><main><h1>Hello, clean HTML response!</h1><p>This is a paragraph in the response.</p></main></html>"
     )
