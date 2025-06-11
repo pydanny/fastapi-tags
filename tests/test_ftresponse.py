@@ -87,3 +87,25 @@ def test_strings_and_ft_children():
         response.text
         == "<!doctype html><html><p>This isn't a <strong>cut off</strong> sentence</p></html>"
     )
+
+
+def test_custom_ftag_in_response():
+    import fastapi_tags as ft
+
+    app = FastAPI()
+
+    def Card(sentence):
+        return ft.Article(ft.Header("Header"), sentence, ft.Footer("Footer"))
+
+    @app.get("/test", response_class=ft.FTResponse)
+    def test_endpoint():
+        return Card("This is a sentence")
+
+    client = TestClient(app)
+    response = client.get("/test")
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert (
+        response.text
+        == "<article><header>Header</header>This is a sentence<footer>Footer</footer></article>"
+    )

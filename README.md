@@ -52,14 +52,48 @@ async def time():
     return ft.P("Time to do code!")
 ```
 
+# Custom FTags
+
+There are several ways to create custom FTags
+
 # Subclassing
 
 ```python
-class AwesomeP(ft.P):
+class AwesomeP(ft.P) -> ft.FTag:
     def render(self) -> str:
         return f"<p{self.attrs}>AWESOME {self.children}!</p>"
+AwesomeP('library')
 ```
 
 ```html
 <p>AWESOME library!</p>
+```
+
+# Custom tags built as functions
+
+```python
+def PicoCard(header: str, body: str, footer: str) -> ft.FTag:
+    return ft.Article(
+        ft.Header(header),
+        body,
+        ft.Footer(footer)
+    )
+```
+
+```python
+@app.get("/card", response_class=ft.FTResponse)
+async def card():
+    return PicoCard(
+        'FastAPI Tags',
+        'Adds s-expression HTML tags (FTags) to FastAPI views.',
+        'by various contributors'
+    )
+```
+
+```html
+<article>
+    <header>FastAPI Tags</header>
+    Adds s-expression HTML tags (FTags) to FastAPI views.
+    <footer>by various contributors</footer>
+</article>
 ```
