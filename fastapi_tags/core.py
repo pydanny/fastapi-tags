@@ -1,7 +1,7 @@
 import importlib
 from typing import Any
 from fastapi import Response
-
+from fastapi_tags.tags import FTag
 
 def dict_to_ft_component(d):
     children_raw = d.get("_children", ())
