@@ -97,3 +97,9 @@ async def card():
     <footer>by various contributors</footer>
 </article>
 ```
+
+# Layouts
+
+Layouts are a way to define a common structure for your HTML pages. You can create a layout by defining it with FTags and then 
+
+```python
