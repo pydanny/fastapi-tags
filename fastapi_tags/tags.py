@@ -28,19 +28,19 @@ def attrmap(o):
     return _fix_k(o)
 
 
-class FTag:
+class Tag:
     def __init__(self, *children, **kwargs):
-        """Sets three attributes, tag, children, and attrs.
+        """Sets four attributes, name, module, children, and attrs.
         These are important for Starlette view responses, as nested objects
         get auto-serialized to JSON and need to be rebuilt. Without
         the values of these attributes, the object reconstruction can't occur"""
-        self._tag = self.__class__.__name__
+        self._name = self.__class__.__name__
         self._module = self.__class__.__module__
         self._children, self._attrs = children, kwargs
 
     @property
-    def tag(self) -> str:
-        return self._tag.lower()
+    def name(self) -> str:
+        return self._name.lower()
 
     @property
     def attrs(self) -> str:
@@ -50,20 +50,20 @@ class FTag:
 
     @cached_property
     def children(self):
-        if isinstance(self._children, str | FTag):
+        if isinstance(self._children, str | Tag):
             return self._children
         return "".join(
-            [c.render() if isinstance(c, FTag) else c for c in self._children]
+            [c.render() if isinstance(c, Tag) else c for c in self._children]
         )
 
     def render(self) -> str:
-        return f"<{self.tag}{self.attrs}>{self.children}</{self.tag}>"
+        return f"<{self.name}{self.attrs}>{self.children}</{self.name}>"
 
 
 # Special tags
 
 
-class Html(FTag):
+class Html(Tag):
     """Defines the root of an HTML document"""
 
     def render(self) -> str:
@@ -73,673 +73,673 @@ class Html(FTag):
 # Stock tags
 
 
-class A(FTag):
+class A(Tag):
     """Defines a hyperlink"""
 
     pass
 
 
-class Abbr(FTag):
+class Abbr(Tag):
     """Defines an abbreviation or an acronym"""
 
     pass
 
 
-class Address(FTag):
+class Address(Tag):
     """Defines contact information for the author/owner of a document"""
 
     pass
 
 
-class Area(FTag):
+class Area(Tag):
     """Defines an area inside an image map"""
 
     pass
 
 
-class Article(FTag):
+class Article(Tag):
     """Defines an article"""
 
     pass
 
 
-class Aside(FTag):
+class Aside(Tag):
     """Defines content aside from the page content"""
 
     pass
 
 
-class Audio(FTag):
+class Audio(Tag):
     """Defines embedded sound content"""
 
     pass
 
 
-class B(FTag):
+class B(Tag):
     """Defines bold text"""
 
     pass
 
 
-class Base(FTag):
+class Base(Tag):
     """Specifies the base URL/target for all relative URLs in a document"""
 
     pass
 
 
-class Bdi(FTag):
+class Bdi(Tag):
     """Isolates a part of text that might be formatted in a different direction from other text outside it"""
 
     pass
 
 
-class Bdo(FTag):
+class Bdo(Tag):
     """Overrides the current text direction"""
 
     pass
 
 
-class Blockquote(FTag):
+class Blockquote(Tag):
     """Defines a section that is quoted from another source"""
 
     pass
 
 
-class Body(FTag):
+class Body(Tag):
     """Defines the document's body"""
 
     pass
 
 
-class Br(FTag):
+class Br(Tag):
     """Defines a single line break"""
 
     pass
 
 
-class Button(FTag):
+class Button(Tag):
     """Defines a clickable button"""
 
     pass
 
 
-class Canvas(FTag):
+class Canvas(Tag):
     """Used to draw graphics, on the fly, via scripting (usually JavaScript)"""
 
     pass
 
 
-class Caption(FTag):
+class Caption(Tag):
     """Defines a table caption"""
 
     pass
 
 
-class Cite(FTag):
+class Cite(Tag):
     """Defines the title of a work"""
 
     pass
 
 
-class Code(FTag):
+class Code(Tag):
     """Defines a piece of computer code"""
 
     pass
 
 
-class Col(FTag):
+class Col(Tag):
     """Specifies column properties for each column within a <colgroup> element"""
 
     pass
 
 
-class Colgroup(FTag):
+class Colgroup(Tag):
     """Specifies a group of one or more columns in a table for formatting"""
 
     pass
 
 
-class Data(FTag):
+class Data(Tag):
     """Adds a machine-readable translation of a given content"""
 
     pass
 
 
-class Datalist(FTag):
+class Datalist(Tag):
     """Specifies a list of pre-defined options for input controls"""
 
     pass
 
 
-class Dd(FTag):
+class Dd(Tag):
     """Defines a description/value of a term in a description list"""
 
     pass
 
 
-class Del(FTag):
+class Del(Tag):
     """Defines text that has been deleted from a document"""
 
     pass
 
 
-class Details(FTag):
+class Details(Tag):
     """Defines additional details that the user can view or hide"""
 
     pass
 
 
-class Dfn(FTag):
+class Dfn(Tag):
     """Specifies a term that is going to be defined within the content"""
 
     pass
 
 
-class Dialog(FTag):
+class Dialog(Tag):
     """Defines a dialog box or window"""
 
     pass
 
 
-class Div(FTag):
+class Div(Tag):
     """Defines a section in a document"""
 
     pass
 
 
-class Dl(FTag):
+class Dl(Tag):
     """Defines a description list"""
 
     pass
 
 
-class Dt(FTag):
+class Dt(Tag):
     """Defines a term/name in a description list"""
 
     pass
 
 
-class Em(FTag):
+class Em(Tag):
     """Defines emphasized text"""
 
     pass
 
 
-class Embed(FTag):
+class Embed(Tag):
     """Defines a container for an external application"""
 
     pass
 
 
-class Fieldset(FTag):
+class Fieldset(Tag):
     """Groups related elements in a form"""
 
     pass
 
 
-class Figcaption(FTag):
+class Figcaption(Tag):
     """Defines a caption for a <figure> element"""
 
     pass
 
 
-class Figure(FTag):
+class Figure(Tag):
     """Specifies self-contained content"""
 
     pass
 
 
-class Footer(FTag):
+class Footer(Tag):
     """Defines a footer for a document or section"""
 
     pass
 
 
-class Form(FTag):
+class Form(Tag):
     """Defines an HTML form for user input"""
 
     pass
 
 
-class H1(FTag):
+class H1(Tag):
     """H1 header"""
 
     pass
 
 
-class H2(FTag):
+class H2(Tag):
     """H2 header"""
 
     pass
 
 
-class H3(FTag):
+class H3(Tag):
     """H3 header"""
 
     pass
 
 
-class H4(FTag):
+class H4(Tag):
     """H4 header"""
 
     pass
 
 
-class H5(FTag):
+class H5(Tag):
     """H5 header"""
 
     pass
 
 
-class H6(FTag):
+class H6(Tag):
     """H6 header"""
 
     pass
 
 
-class Head(FTag):
+class Head(Tag):
     """Contains metadata/information for the document"""
 
     pass
 
 
-class Header(FTag):
+class Header(Tag):
     """Defines a header for a document or section"""
 
     pass
 
 
-class Hgroup(FTag):
+class Hgroup(Tag):
     """Defines a header and related content"""
 
     pass
 
 
-class Hr(FTag):
+class Hr(Tag):
     """Defines a thematic change in the content"""
 
     pass
 
 
-class I(FTag):  # noqa: E742
+class I(Tag):  # noqa: E742
     """Defines a part of text in an alternate voice or mood"""
 
     pass
 
 
-class Iframe(FTag):
+class Iframe(Tag):
     """Defines an inline frame"""
 
     pass
 
 
-class Img(FTag):
+class Img(Tag):
     """Defines an image"""
 
     pass
 
 
-class Input(FTag):
+class Input(Tag):
     """Defines an input control"""
 
     pass
 
 
-class Ins(FTag):
+class Ins(Tag):
     """Defines a text that has been inserted into a document"""
 
     pass
 
 
-class Kbd(FTag):
+class Kbd(Tag):
     """Defines keyboard input"""
 
     pass
 
 
-class Label(FTag):
+class Label(Tag):
     """Defines a label for an <input> element"""
 
     pass
 
 
-class Legend(FTag):
+class Legend(Tag):
     """Defines a caption for a <fieldset> element"""
 
     pass
 
 
-class Li(FTag):
+class Li(Tag):
     """Defines a list item"""
 
     pass
 
 
-class Link(FTag):
+class Link(Tag):
     """Defines the relationship between a document and an external resource (most used to link to style sheets)"""
 
     pass
 
 
-class Main(FTag):
+class Main(Tag):
     """Specifies the main content of a document"""
 
     pass
 
 
-class Map(FTag):
+class Map(Tag):
     """Defines an image map"""
 
     pass
 
 
-class Mark(FTag):
+class Mark(Tag):
     """Defines marked/highlighted text"""
 
     pass
 
 
-class Menu(FTag):
+class Menu(Tag):
     """Defines an unordered list"""
 
     pass
 
 
-class Meta(FTag):
+class Meta(Tag):
     """Defines metadata about an HTML document"""
 
     pass
 
 
-class Meter(FTag):
+class Meter(Tag):
     """Defines a scalar measurement within a known range (a gauge)"""
 
     pass
 
 
-class Nav(FTag):
+class Nav(Tag):
     """Defines navigation links"""
 
     pass
 
 
-class Noscript(FTag):
+class Noscript(Tag):
     """Defines an alternate content for users that do not support client-side scripts"""
 
     pass
 
 
-class Object(FTag):
+class Object(Tag):
     """Defines a container for an external application"""
 
     pass
 
 
-class Ol(FTag):
+class Ol(Tag):
     """Defines an ordered list"""
 
     pass
 
 
-class Optgroup(FTag):
+class Optgroup(Tag):
     """Defines a group of related options in a drop-down list"""
 
     pass
 
 
-class Option(FTag):
+class Option(Tag):
     """Defines an option in a drop-down list"""
 
     pass
 
 
-class Output(FTag):
+class Output(Tag):
     """Defines the result of a calculation"""
 
     pass
 
 
-class P(FTag):
+class P(Tag):
     """Defines a paragraph"""
 
     pass
 
 
-class Param(FTag):
+class Param(Tag):
     """Defines a parameter for an object"""
 
     pass
 
 
-class Picture(FTag):
+class Picture(Tag):
     """Defines a container for multiple image resources"""
 
     pass
 
 
-class Pre(FTag):
+class Pre(Tag):
     """Defines preformatted text"""
 
     pass
 
 
-class Progress(FTag):
+class Progress(Tag):
     """Represents the progress of a task"""
 
     pass
 
 
-class Q(FTag):
+class Q(Tag):
     """Defines a short quotation"""
 
     pass
 
 
-class Rp(FTag):
+class Rp(Tag):
     """Defines what to show in browsers that do not support ruby annotations"""
 
     pass
 
 
-class Rt(FTag):
+class Rt(Tag):
     """Defines an explanation/pronunciation of characters (for East Asian typography)"""
 
     pass
 
 
-class Ruby(FTag):
+class Ruby(Tag):
     """Defines a ruby annotation (for East Asian typography)"""
 
     pass
 
 
-class S(FTag):
+class S(Tag):
     """Defines text that is no longer correct"""
 
     pass
 
 
-class Samp(FTag):
+class Samp(Tag):
     """Defines sample output from a computer program"""
 
     pass
 
 
-class Script(FTag):
+class Script(Tag):
     """Defines a client-side script"""
 
     pass
 
 
-class Search(FTag):
+class Search(Tag):
     """Defines a search section"""
 
     pass
 
 
-class Section(FTag):
+class Section(Tag):
     """Defines a section in a document"""
 
     pass
 
 
-class Select(FTag):
+class Select(Tag):
     """Defines a drop-down list"""
 
     pass
 
 
-class Small(FTag):
+class Small(Tag):
     """Defines smaller text"""
 
     pass
 
 
-class Source(FTag):
+class Source(Tag):
     """Defines multiple media resources for media elements (<video> and <audio>)"""
 
     pass
 
 
-class Span(FTag):
+class Span(Tag):
     """Defines a section in a document"""
 
     pass
 
 
-class Strong(FTag):
+class Strong(Tag):
     """Defines important text"""
 
     pass
 
 
-class Style(FTag):
+class Style(Tag):
     """Defines style information for a document"""
 
     pass
 
 
-class Sub(FTag):
+class Sub(Tag):
     """Defines subscripted text"""
 
     pass
 
 
-class Summary(FTag):
+class Summary(Tag):
     """Defines a visible heading for a <details> element"""
 
     pass
 
 
-class Sup(FTag):
+class Sup(Tag):
     """Defines superscripted text"""
 
     pass
 
 
-class Svg(FTag):
+class Svg(Tag):
     """Defines a container for SVG graphics"""
 
     pass
 
 
-class Table(FTag):
+class Table(Tag):
     """Defines a table"""
 
     pass
 
 
-class Tbody(FTag):
+class Tbody(Tag):
     """Groups the body content in a table"""
 
     pass
 
 
-class Td(FTag):
+class Td(Tag):
     """Defines a cell in a table"""
 
     pass
 
 
-class Template(FTag):
+class Template(Tag):
     """Defines a container for content that should be hidden when the page loads"""
 
     pass
 
 
-class Textarea(FTag):
+class Textarea(Tag):
     """Defines a multiline input control (text area)"""
 
     pass
 
 
-class Tfoot(FTag):
+class Tfoot(Tag):
     """Groups the footer content in a table"""
 
     pass
 
 
-class Th(FTag):
+class Th(Tag):
     """Defines a header cell in a table"""
 
     pass
 
 
-class Thead(FTag):
+class Thead(Tag):
     """Groups the header content in a table"""
 
     pass
 
 
-class Time(FTag):
+class Time(Tag):
     """Defines a specific time (or datetime)"""
 
     pass
 
 
-class Title(FTag):
+class Title(Tag):
     """Defines a title for the document"""
 
     pass
 
 
-class Tr(FTag):
+class Tr(Tag):
     """Defines a row in a table"""
 
     pass
 
 
-class Track(FTag):
+class Track(Tag):
     """Defines text tracks for media elements (<video> and <audio>)"""
 
     pass
 
 
-class U(FTag):
+class U(Tag):
     """Defines some text that is unarticulated and styled differently from normal text"""
 
     pass
 
 
-class Ul(FTag):
+class Ul(Tag):
     """Defines an unordered list"""
 
     pass
 
 
-class Var(FTag):
+class Var(Tag):
     """Defines a variable"""
 
     pass
 
 
-class Video(FTag):
+class Video(Tag):
     """Defines embedded video content"""
 
     pass
 
 
-class Wbr(FTag):
+class Wbr(Tag):
     """Defines a possible line-break"""
 
     pass

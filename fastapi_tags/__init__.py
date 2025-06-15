@@ -1,7 +1,7 @@
 """Extension for FastAPI to make fasttags easier to use."""
 
-from .core import FTResponse as FTResponse
-from .tags import FTag as FTag
+from .core import TagResponse as TagResponse
+from .tags import Tag as Tag
 from .tags import (
     A as A,
     Abbr as Abbr,

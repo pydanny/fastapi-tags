@@ -1,29 +1,29 @@
-import fastapi_tags as ft
+import fastapi_tags as tags
 
 
 def test_atag_no_attrs_no_children():
-    assert ft.A().render() == "<a></a>"
+    assert tags.A().render() == "<a></a>"
 
 
 def test_atag_yes_attrs_no_children():
-    tag = ft.A(href="/", cls="link").render()
+    tag = tags.A(href="/", cls="link").render()
     assert tag == '<a href="/" class="link"></a>'
 
 
 def test_atag_yes_attrs_text_children():
-    tag = ft.A("Link here", href="/", cls="link").render()
+    tag = tags.A("Link here", href="/", cls="link").render()
     assert tag == '<a href="/" class="link">Link here</a>'
 
 
 def test_divtag_yes_attrs_a_child():
-    html = ft.Div(ft.A("Link here", href="/", cls="link")).render()
+    html = tags.Div(tags.A("Link here", href="/", cls="link")).render()
     assert html == '<div><a href="/" class="link">Link here</a></div>'
 
 
 def test_divtag_yes_attrs_multiple_a_children():
-    html = ft.Div(
-        ft.A("Link here", href="/", cls="link"),
-        ft.A("Another link", href="/", cls="timid"),
+    html = tags.Div(
+        tags.A("Link here", href="/", cls="link"),
+        tags.A("Another link", href="/", cls="timid"),
     ).render()
     assert (
         html
@@ -32,11 +32,11 @@ def test_divtag_yes_attrs_multiple_a_children():
 
 
 def test_divtag_yes_attrs_nested_children():
-    html = ft.Div(
-        ft.P(
+    html = tags.Div(
+        tags.P(
             "Links are here",
-            ft.A("Link here", href="/", cls="link"),
-            ft.A("Another link", href="/", cls="timid"),
+            tags.A("Link here", href="/", cls="link"),
+            tags.A("Another link", href="/", cls="timid"),
         )
     ).render()
     assert (
@@ -45,14 +45,14 @@ def test_divtag_yes_attrs_nested_children():
     )
 
 
-def test_tag_types():
-    assert issubclass(ft.A, ft.FTag)
-    assert issubclass(ft.Div, ft.FTag)
-    assert issubclass(ft.P, ft.FTag)
+def test_name_types():
+    assert issubclass(tags.A, tags.Tag)
+    assert issubclass(tags.Div, tags.Tag)
+    assert issubclass(tags.P, tags.Tag)
 
 
 def test_subclassing():
-    class AwesomeP(ft.P):
+    class AwesomeP(tags.P):
         def render(self) -> str:
             return f"<p{self.attrs}>AWESOME {self.children}!</p>"
 
@@ -60,14 +60,14 @@ def test_subclassing():
 
 
 def test_subclassing_nested():
-    class AwesomeP(ft.P):
+    class AwesomeP(tags.P):
         def render(self) -> str:
             return f"<p{self.attrs}>AWESOME {self.children}!</p>"
 
-    html = ft.Div(AwesomeP("library")).render()
+    html = tags.Div(AwesomeP("library")).render()
     assert html == "<div><p>AWESOME library!</p></div>"
 
 
 def test_text_child_with_sibling_elements():
-    html = ft.P("This is a", ft.Strong("cut off"), "sentence").render()
+    html = tags.P("This is a", tags.Strong("cut off"), "sentence").render()
     assert html == "<p>This is a<strong>cut off</strong>sentence</p>"
