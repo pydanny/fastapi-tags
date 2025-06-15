@@ -21,6 +21,10 @@ class TagResponse(Response):
 
     media_type = "text/html; charset=utf-8"
 
+    def is_htmx(request=None):
+        "Check if the request is an HTMX request"
+        return request and "hx-request" in request.headers
+
     def render(self, content: Any) -> bytes:
         """Render Tag elements to bytes of HTML."""
         if isinstance(content, dict):
