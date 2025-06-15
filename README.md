@@ -1,6 +1,6 @@
 # FastAPI Tags
 
-Adds s-expression HTML tags (FTags) to FastAPI views. Inspired by FastHTML's use of fastcore's FT components.
+Adds s-expression HTML tags to FastAPI views. Inspired by FastHTML's use of fastcore's FT components.
 
 
 <p align="center">
@@ -35,31 +35,31 @@ uv pip install fastapi-tags
 
 ```python
 from fastapi import FastAPI
-import fastapi_tags as ft
+import fastapi_tags as tags
 
 app = FastAPI()
 
-@app.get("/", response_class=ft.FTResponse)
+@app.get("/", response_class=tags.TagResponse)
 async def index():
-    return ft.Html(ft.H1("Hello, world!", style="color: blue;"))
+    return tags.Html(tags.H1("Hello, world!", style="color: blue;"))
 ```
 
-If you want to do snippets, just skip the `ft.Html` tag:
+If you want to do snippets, just skip the `tags.Html` tag:
 
 ```python
-@app.get("/time", response_class=ft.FTResponse)
+@app.get("/time", response_class=tags.TagResponse)
 async def time():
-    return ft.P("Time to do code!")
+    return tags.P("Time to do code!")
 ```
 
-# Custom FTags
+# Custom Tags
 
-There are several ways to create custom FTags
+There are several ways to create custom Tags
 
 # Subclassing
 
 ```python
-class AwesomeP(ft.P) -> ft.FTag:
+class AwesomeP(tags.P) -> tags.Tag:
     def render(self) -> str:
         return f"<p{self.attrs}>AWESOME {self.children}!</p>"
 AwesomeP('library')
@@ -72,20 +72,20 @@ AwesomeP('library')
 # Custom tags built as functions
 
 ```python
-def PicoCard(header: str, body: str, footer: str) -> ft.FTag:
-    return ft.Article(
-        ft.Header(header),
+def PicoCard(header: str, body: str, footer: str) -> tags.Tag:
+    return tags.Article(
+        tags.Header(header),
         body,
-        ft.Footer(footer)
+        tags.Footer(footer)
     )
 ```
 
 ```python
-@app.get("/card", response_class=ft.FTResponse)
+@app.get("/card", response_class=tags.TagResponse)
 async def card():
     return PicoCard(
         'FastAPI Tags',
-        'Adds s-expression HTML tags (FTags) to FastAPI views.',
+        'Adds s-expression HTML tags (Tags) to FastAPI views.',
         'by various contributors'
     )
 ```
@@ -93,7 +93,7 @@ async def card():
 ```html
 <article>
     <header>FastAPI Tags</header>
-    Adds s-expression HTML tags (FTags) to FastAPI views.
+    Adds s-expression HTML tags (Tags) to FastAPI views.
     <footer>by various contributors</footer>
 </article>
 ```
