@@ -169,8 +169,25 @@ def test_is_htmx():
     import fastapi_tags as tg
     from fastapi import Request
 
-    request = Request(scope={"type": "http", "headers": [(b"hx-request", b"true")]})
-    assert tg.TagResponse.is_htmx(request) is True
+    app = FastAPI()
+    app.add_middleware(tg.TagMiddleware)
 
-    request = Request(scope={"type": "http", "headers": []})
-    assert tg.TagResponse.is_htmx(request) is False
+    @app.get("/test", response_class=tg.TagResponse)
+    def test_endpoint(request: Request):
+        return tg.H1("Hello, World!")
+
+    client = TestClient(app)
+    response = client.get("/test", headers={"hx-request": "true"})
+
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert (
+        response.text
+        == "<h1>Hello, World!</h1>"
+    )    
+
+    # request = Request(scope={"type": "http", "headers": [(b"hx-request", b"true")]})
+    # assert tg.TagResponse.is_htmx(request) is True
+
+    # request = Request(scope={"type": "http", "headers": []})
+    # assert tg.TagResponse.is_htmx(request) is False
