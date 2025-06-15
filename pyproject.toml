@@ -1,6 +1,6 @@
 [project]
 name = "fastapi-tags"
-version = "0.2.1"
+version = "0.3.0"
 description = "Adds s-expression HTML tags to FastAPI views. Inspired by FastHTML's use of fastcore's FT components."
 readme = "README.md"
 requires-python = ">=3.10"
