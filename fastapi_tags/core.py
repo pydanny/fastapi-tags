@@ -17,7 +17,7 @@ def dict_to_ft_component(d):
 
 
 class TagResponse(Response):
-    """Custom response class to handle Tags."""
+    """Custom response class to handle fastapi_tags.tags.Tags."""
 
     media_type = "text/html; charset=utf-8"
 

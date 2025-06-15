@@ -5,13 +5,13 @@ from typing import Any
 
 def test_nameResponse_obj():
     """Test the TagResponse class."""
-    import fastapi_tags as tags
+    import fastapi_tags as tg
 
     app = FastAPI()
 
     @app.get("/test")
     def test_endpoint():
-        return tags.TagResponse(tags.H1("Hello, World!"))
+        return tg.TagResponse(tg.H1("Hello, World!"))
 
     client = TestClient(app)
     response = client.get("/test")
@@ -23,15 +23,15 @@ def test_nameResponse_obj():
 
 def test_nameResponse_type():
     """Test the TagResponse class."""
-    import fastapi_tags as tags
+    import fastapi_tags as tg
 
     app = FastAPI()
 
-    @app.get("/test", response_class=tags.TagResponse)
+    @app.get("/test", response_class=tg.TagResponse)
     def test_endpoint():
-        return tags.Main(
-            tags.H1("Hello, clean HTML response!"),
-            tags.P("This is a paragraph in the response."),
+        return tg.Main(
+            tg.H1("Hello, clean HTML response!"),
+            tg.P("This is a paragraph in the response."),
         )
 
     client = TestClient(app)
@@ -47,16 +47,16 @@ def test_nameResponse_type():
 
 def test_nameResponse_html():
     """Test the TagResponse class."""
-    import fastapi_tags as tags
+    import fastapi_tags as tg
 
     app = FastAPI()
 
-    @app.get("/test", response_class=tags.TagResponse)
+    @app.get("/test", response_class=tg.TagResponse)
     def test_endpoint():
-        return tags.Html(
-            tags.Main(
-                tags.H1("Hello, clean HTML response!"),
-                tags.P("This is a paragraph in the response."),
+        return tg.Html(
+            tg.Main(
+                tg.H1("Hello, clean HTML response!"),
+                tg.P("This is a paragraph in the response."),
             )
         )
 
@@ -72,13 +72,13 @@ def test_nameResponse_html():
 
 
 def test_strings_and_ft_children():
-    import fastapi_tags as tags
+    import fastapi_tags as tg
 
     app = FastAPI()
 
-    @app.get("/test", response_class=tags.TagResponse)
+    @app.get("/test", response_class=tg.TagResponse)
     def test_endpoint():
-        return tags.Html(tags.P("This isn't a ", tags.Strong("cut off"), " sentence"))
+        return tg.Html(tg.P("This isn't a ", tg.Strong("cut off"), " sentence"))
 
     client = TestClient(app)
     response = client.get("/test")
@@ -91,14 +91,14 @@ def test_strings_and_ft_children():
 
 
 def test_custom_name_in_response():
-    import fastapi_tags as tags
+    import fastapi_tags as tg
 
     app = FastAPI()
 
     def Card(sentence):
-        return tags.Article(tags.Header("Header"), sentence, tags.Footer("Footer"))
+        return tg.Article(tg.Header("Header"), sentence, tg.Footer("Footer"))
 
-    @app.get("/test", response_class=tags.TagResponse)
+    @app.get("/test", response_class=tg.TagResponse)
     def test_endpoint():
         return Card("This is a sentence")
 
@@ -113,9 +113,9 @@ def test_custom_name_in_response():
 
 
 def test_nameResponse_with_layout_strings():
-    import fastapi_tags as tags
+    import fastapi_tags as tg
 
-    class CustomLayoutResponse(tags.TagResponse):
+    class CustomLayoutResponse(tg.TagResponse):
         def render(self, content: Any) -> bytes:
             content = super().render(content)
             return f"<html><body><h1>Custom Layout</h1>{content}</body></html>".encode(
@@ -126,7 +126,7 @@ def test_nameResponse_with_layout_strings():
 
     @app.get("/test", response_class=CustomLayoutResponse)
     def test_endpoint():
-        return tags.Main(tags.H2("Hello, World!"))
+        return tg.Main(tg.H2("Hello, World!"))
 
     client = TestClient(app)
     response = client.get("/test")
@@ -140,18 +140,18 @@ def test_nameResponse_with_layout_strings():
 
 
 def test_nameResponse_with_layout_names():
-    import fastapi_tags as tags
+    import fastapi_tags as tg
 
-    class CustomLayoutResponse(tags.TagResponse):
+    class CustomLayoutResponse(tg.TagResponse):
         def render(self, content: Any) -> bytes:
             content = super().render(content).decode("utf-8")
-            return tags.Html(content).render().encode("utf-8")
+            return tg.Html(content).render().encode("utf-8")
 
     app = FastAPI()
 
     @app.get("/test", response_class=CustomLayoutResponse)
     def test_endpoint():
-        return tags.Main(tags.H1("Hello, World!"))
+        return tg.Main(tg.H1("Hello, World!"))
 
     client = TestClient(app)
     response = client.get("/test")

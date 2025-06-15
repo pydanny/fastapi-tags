@@ -11,7 +11,7 @@ Adds s-expression HTML tags to FastAPI views. Inspired by FastHTML's use of fast
     <img src="https://img.shields.io/pypi/v/fastapi-tags?color=%2334D058&label=pypi%20package" alt="Package version">
 </a>
 <a href="https://pypi.org/project/fastapi-tags" target="_blank">
-    <img src="https://img.shields.io/pypi/pyversions/fastapi-tags.svg?color=%2334D058" alt="Supported Python versions">
+    <img src="https://img.shields.io/pypi/pyversions/fastapi-tg.svg?color=%2334D058" alt="Supported Python versions">
 </a>
 </p>
 
@@ -35,21 +35,21 @@ uv pip install fastapi-tags
 
 ```python
 from fastapi import FastAPI
-import fastapi_tags as tags
+import fastapi_tags as tg
 
 app = FastAPI()
 
-@app.get("/", response_class=tags.TagResponse)
+@app.get("/", response_class=tg.TagResponse)
 async def index():
-    return tags.Html(tags.H1("Hello, world!", style="color: blue;"))
+    return tg.Html(tg.H1("Hello, world!", style="color: blue;"))
 ```
 
-If you want to do snippets, just skip the `tags.Html` tag:
+If you want to do snippets, just skip the `tg.Html` tag:
 
 ```python
-@app.get("/time", response_class=tags.TagResponse)
+@app.get("/time", response_class=tg.TagResponse)
 async def time():
-    return tags.P("Time to do code!")
+    return tg.P("Time to do code!")
 ```
 
 # Custom Tags
@@ -59,7 +59,7 @@ There are several ways to create custom Tags
 # Subclassing
 
 ```python
-class AwesomeP(tags.P) -> tags.Tag:
+class AwesomeP(tg.P) -> tg.Tag:
     def render(self) -> str:
         return f"<p{self.attrs}>AWESOME {self.children}!</p>"
 AwesomeP('library')
@@ -72,16 +72,16 @@ AwesomeP('library')
 # Custom tags built as functions
 
 ```python
-def PicoCard(header: str, body: str, footer: str) -> tags.Tag:
-    return tags.Article(
-        tags.Header(header),
+def PicoCard(header: str, body: str, footer: str) -> tg.Tag:
+    return tg.Article(
+        tg.Header(header),
         body,
-        tags.Footer(footer)
+        tg.Footer(footer)
     )
 ```
 
 ```python
-@app.get("/card", response_class=tags.TagResponse)
+@app.get("/card", response_class=tg.TagResponse)
 async def card():
     return PicoCard(
         'FastAPI Tags',
