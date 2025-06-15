@@ -11,7 +11,7 @@ Adds s-expression HTML tags to FastAPI views. Inspired by FastHTML's use of fast
     <img src="https://img.shields.io/pypi/v/fastapi-tags?color=%2334D058&label=pypi%20package" alt="Package version">
 </a>
 <a href="https://pypi.org/project/fastapi-tags" target="_blank">
-    <img src="https://img.shields.io/pypi/pyversions/fastapi-tg.svg?color=%2334D058" alt="Supported Python versions">
+    <img src="https://img.shields.io/pypi/pyversions/fastapi-tags.svg?color=%2334D058" alt="Supported Python versions">
 </a>
 </p>
 
