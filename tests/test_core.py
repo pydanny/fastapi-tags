@@ -3,7 +3,7 @@ from fastapi.testclient import TestClient
 from typing import Any
 
 
-def test_nameResponse_obj():
+def test_TagResponse_obj():
     """Test the TagResponse class."""
     import fastapi_tags as tg
 
@@ -21,7 +21,7 @@ def test_nameResponse_obj():
     assert response.text == "<h1>Hello, World!</h1>"
 
 
-def test_nameResponse_type():
+def test_TagResponse_type():
     """Test the TagResponse class."""
     import fastapi_tags as tg
 
@@ -45,7 +45,7 @@ def test_nameResponse_type():
     )
 
 
-def test_nameResponse_html():
+def test_TagResponse_html():
     """Test the TagResponse class."""
     import fastapi_tags as tg
 
@@ -71,7 +71,7 @@ def test_nameResponse_html():
     )
 
 
-def test_strings_and_ft_children():
+def test_strings_and_tag_children():
     import fastapi_tags as tg
 
     app = FastAPI()
@@ -112,7 +112,7 @@ def test_custom_name_in_response():
     )
 
 
-def test_nameResponse_with_layout_strings():
+def test_TagResponse_with_layout_strings():
     import fastapi_tags as tg
 
     class CustomLayoutResponse(tg.TagResponse):
@@ -139,7 +139,7 @@ def test_nameResponse_with_layout_strings():
     )
 
 
-def test_nameResponse_with_layout_names():
+def test_TagResponse_with_layout_names():
     import fastapi_tags as tg
 
     class CustomLayoutResponse(tg.TagResponse):
@@ -162,3 +162,15 @@ def test_nameResponse_with_layout_names():
         response.text
         == "<!doctype html><html><main><h1>Hello, World!</h1></main></html>"
     )
+
+
+def test_is_htmx():
+    """Test the is_htmx method."""
+    import fastapi_tags as tg
+    from fastapi import Request
+
+    request = Request(scope={"type": "http", "headers": [(b"hx-request", b"true")]})
+    assert tg.TagResponse.is_htmx(request) is True
+
+    request = Request(scope={"type": "http", "headers": []})
+    assert tg.TagResponse.is_htmx(request) is False
