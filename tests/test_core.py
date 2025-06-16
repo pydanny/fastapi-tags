@@ -1,11 +1,12 @@
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 from typing import Any
+import fastapi_tags as tg
+from fastapi import Request
 
 
 def test_TagResponse_obj():
     """Test the TagResponse class."""
-    import fastapi_tags as tg
 
     app = FastAPI()
 
@@ -23,7 +24,6 @@ def test_TagResponse_obj():
 
 def test_TagResponse_type():
     """Test the TagResponse class."""
-    import fastapi_tags as tg
 
     app = FastAPI()
 
@@ -47,7 +47,6 @@ def test_TagResponse_type():
 
 def test_TagResponse_html():
     """Test the TagResponse class."""
-    import fastapi_tags as tg
 
     app = FastAPI()
 
@@ -72,8 +71,6 @@ def test_TagResponse_html():
 
 
 def test_strings_and_tag_children():
-    import fastapi_tags as tg
-
     app = FastAPI()
 
     @app.get("/test", response_class=tg.TagResponse)
@@ -91,8 +88,6 @@ def test_strings_and_tag_children():
 
 
 def test_custom_name_in_response():
-    import fastapi_tags as tg
-
     app = FastAPI()
 
     def Card(sentence):
@@ -113,8 +108,6 @@ def test_custom_name_in_response():
 
 
 def test_TagResponse_with_layout_strings():
-    import fastapi_tags as tg
-
     class CustomLayoutResponse(tg.TagResponse):
         def render(self, content: Any) -> bytes:
             content = super().render(content)
@@ -140,8 +133,6 @@ def test_TagResponse_with_layout_strings():
 
 
 def test_TagResponse_with_layout_names():
-    import fastapi_tags as tg
-
     class CustomLayoutResponse(tg.TagResponse):
         def render(self, content: Any) -> bytes:
             content = super().render(content).decode("utf-8")
@@ -166,28 +157,25 @@ def test_TagResponse_with_layout_names():
 
 def test_is_htmx():
     """Test the is_htmx method."""
-    import fastapi_tags as tg
-    from fastapi import Request
-
     app = FastAPI()
-    app.add_middleware(tg.TagMiddleware)
+    app.add_middleware(tg.TagHTMXMiddleware)
 
     @app.get("/test", response_class=tg.TagResponse)
     def test_endpoint(request: Request):
         return tg.H1("Hello, World!")
 
     client = TestClient(app)
-    response = client.get("/test", headers={"hx-request": "true"})
 
+    # Simulate an HTMX request by adding the hx-request header
+    response = client.get("/test", headers={"hx-request": "true"})
     assert response.status_code == 200
     assert response.headers["content-type"] == "text/html; charset=utf-8"
-    assert (
-        response.text
-        == "<h1>Hello, World!</h1>"
-    )    
+    assert response.headers["hx-request"] == "true"
+    assert response.text == "<h1>Hello, World!</h1>"
 
-    # request = Request(scope={"type": "http", "headers": [(b"hx-request", b"true")]})
-    # assert tg.TagResponse.is_htmx(request) is True
-
-    # request = Request(scope={"type": "http", "headers": []})
-    # assert tg.TagResponse.is_htmx(request) is False
+    # Simulate a regular request by adding the hx-request header
+    response = client.get("/test")
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert response.headers.get("hx-request") is None
+    assert response.text == "<h1>Hello, World!</h1>"

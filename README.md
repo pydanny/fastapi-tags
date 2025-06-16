@@ -31,7 +31,7 @@ uv pip install fastapi-tags
 ```
 
 
-# Usage:
+## Usage:
 
 ```python
 from fastapi import FastAPI
@@ -52,11 +52,11 @@ async def time():
     return tg.P("Time to do code!")
 ```
 
-# Custom Tags
+## Custom Tags
 
 There are several ways to create custom Tags
 
-# Subclassing
+### Subclassing
 
 ```python
 class AwesomeP(tg.P) -> tg.Tag:
@@ -69,7 +69,7 @@ AwesomeP('library')
 <p>AWESOME library!</p>
 ```
 
-# Custom tags built as functions
+### Custom tags built as functions
 
 ```python
 def PicoCard(header: str, body: str, footer: str) -> tg.Tag:
@@ -97,3 +97,10 @@ async def card():
     <footer>by various contributors</footer>
 </article>
 ```
+
+## Detecting HTMX requests
+
+The HTMX library adds a header to requests that you can use to detect HTMX requests. You can use this to return different content based on whether the request is an HTMX request or not.
+
+```python
+from fastapi import Request
