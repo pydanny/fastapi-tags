@@ -14,7 +14,6 @@ def dict_to_ft_component(d):
     children = tuple(
         dict_to_ft_component(c) if isinstance(c, dict) else c for c in children_raw
     )
-    # TODO: cache this somehow
     module = importlib.import_module(d["_module"])
     obj = getattr(module, d["_name"])
     return obj(*children, **d.get("_attrs", {}))
