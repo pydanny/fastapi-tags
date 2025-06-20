@@ -2,7 +2,7 @@
 
 __version__ = "0.3.1"
 
-from .core import TagResponse as TagResponse
+from .core import TagResponse as TagResponse, is_htmx_request as is_htmx_request
 from .tags import Tag as Tag
 from .tags import (
     A as A,

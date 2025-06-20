@@ -31,7 +31,7 @@ uv pip install fastapi-tags
 ```
 
 
-# Usage:
+## Usage:
 
 ```python
 from fastapi import FastAPI
@@ -52,11 +52,26 @@ async def time():
     return tg.P("Time to do code!")
 ```
 
-# Custom Tags
+## With HTMX
+
+If you want to detect HTMX use dependency injection:
+
+```python
+from fastapi import Depends
+
+@app.get("/hello", response_class=tg.TagResponse)
+def test_endpoint(is_htmx: bool = Depends(tg.is_htmx_request)):
+    if is_htmx:
+        return tg.H1("Hello, hx-request! Here's a partial of the page.")
+    else:
+        return tg.Html(tg.H1("Hello normal request, Here's the full page!"))
+```
+
+## Custom Tags
 
 There are several ways to create custom Tags
 
-# Subclassing
+### Subclassing
 
 ```python
 class AwesomeP(tg.P) -> tg.Tag:
@@ -69,7 +84,7 @@ AwesomeP('library')
 <p>AWESOME library!</p>
 ```
 
-# Custom tags built as functions
+### Custom tags built as functions
 
 ```python
 def PicoCard(header: str, body: str, footer: str) -> tg.Tag:

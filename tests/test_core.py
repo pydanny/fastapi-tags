@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from fastapi.testclient import TestClient
 from typing import Any
 
@@ -165,12 +165,28 @@ def test_TagResponse_with_layout_names():
 
 
 def test_is_htmx():
-    """Test the is_htmx method."""
+    """Test the is_htmx method, which only works if the response is wrapped."""
     import fastapi_tags as tg
-    from fastapi import Request
 
-    request = Request(scope={"type": "http", "headers": [(b"hx-request", b"true")]})
-    assert tg.TagResponse.is_htmx(request) is True
+    app = FastAPI()
 
-    request = Request(scope={"type": "http", "headers": []})
-    assert tg.TagResponse.is_htmx(request) is False
+    @app.get("/test", response_class=tg.TagResponse)
+    def test_endpoint(is_htmx: bool = Depends(tg.is_htmx_request)):
+        return tg.H1(f"Is HTMX request: {is_htmx}")
+
+    client = TestClient(app)
+
+    response = client.get("/test", headers={"hx-request": "true"})
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert response.text == "<h1>Is HTMX request: True</h1>"
+
+    response = client.get("/test", headers={"hx-request": "false"})
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert response.text == "<h1>Is HTMX request: False</h1>"
+
+    response = client.get("/test")
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert response.text == "<h1>Is HTMX request: False</h1>"

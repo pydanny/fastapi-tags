@@ -1,6 +1,10 @@
 import importlib
 from typing import Any
-from fastapi import Response
+from fastapi import Response, Header
+
+
+def is_htmx_request(hx_request: str = Header(default=None)) -> bool:
+    return hx_request is not None and hx_request.lower() == "true"
 
 
 def dict_to_ft_component(d):
@@ -20,10 +24,6 @@ class TagResponse(Response):
     """Custom response class to handle fastapi_tags.tags.Tags."""
 
     media_type = "text/html; charset=utf-8"
-
-    def is_htmx(request=None):
-        "Check if the request is an HTMX request"
-        return request and "hx-request" in request.headers
 
     def render(self, content: Any) -> bytes:
         """Render Tag elements to bytes of HTML."""
