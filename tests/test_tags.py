@@ -71,3 +71,14 @@ def test_subclassing_nested():
 def test_text_child_with_sibling_elements():
     html = tg.P("This is a", tg.Strong("cut off"), "sentence").render()
     assert html == "<p>This is a<strong>cut off</strong>sentence</p>"
+
+
+def test_special_attributes():
+    html = tg.P("Has a special attribute", **{"@fun": "times ahead"}).render()
+    assert html == '<p @fun="times ahead">Has a special attribute</p>'
+
+    html = tg.P("Has a special attribute", **{"!data": "12345"}).render()
+    assert html == '<p !data="12345">Has a special attribute</p>'
+
+    html = tg.P("HTMX example", hx_post="/get", _id="53").render()
+    assert html == '<p hx-post="/get" id="53">HTMX example</p>'
