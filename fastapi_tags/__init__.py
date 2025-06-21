@@ -1,6 +1,6 @@
 """Adds s-expression HTML tags to FastAPI views."""
 
-__version__ = "0.3.1"
+__version__ = "0.4.0"
 
 from .core import TagResponse as TagResponse, is_htmx_request as is_htmx_request
 from .tags import Tag as Tag
