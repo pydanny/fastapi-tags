@@ -9,12 +9,9 @@ def is_htmx_request(hx_request: str = Header(default=None)) -> bool:
 
 def dict_to_ft_component(d):
     children_raw = d.get("_children", ())
-    if isinstance(children_raw, str):
-        children_raw = (children_raw,)
     children = tuple(
         dict_to_ft_component(c) if isinstance(c, dict) else c for c in children_raw
     )
-    # TODO: cache this somehow
     module = importlib.import_module(d["_module"])
     obj = getattr(module, d["_name"])
     return obj(*children, **d.get("_attrs", {}))

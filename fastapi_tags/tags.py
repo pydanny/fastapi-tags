@@ -50,8 +50,9 @@ class Tag:
 
     @cached_property
     def children(self):
-        if isinstance(self._children, str | Tag):
-            return self._children
+        # Probably not needed
+        # if isinstance(self._children, str | Tag):
+        #     return self._children
         return "".join(
             [c.render() if isinstance(c, Tag) else c for c in self._children]
         )

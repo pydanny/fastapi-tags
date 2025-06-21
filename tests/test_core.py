@@ -1,12 +1,11 @@
 from fastapi import FastAPI, Depends
 from fastapi.testclient import TestClient
 from typing import Any
+import fastapi_tags as tg
 
 
 def test_TagResponse_obj():
     """Test the TagResponse class."""
-    import fastapi_tags as tg
-
     app = FastAPI()
 
     @app.get("/test")
@@ -23,7 +22,6 @@ def test_TagResponse_obj():
 
 def test_TagResponse_type():
     """Test the TagResponse class."""
-    import fastapi_tags as tg
 
     app = FastAPI()
 
@@ -47,7 +45,6 @@ def test_TagResponse_type():
 
 def test_TagResponse_html():
     """Test the TagResponse class."""
-    import fastapi_tags as tg
 
     app = FastAPI()
 
@@ -72,8 +69,6 @@ def test_TagResponse_html():
 
 
 def test_strings_and_tag_children():
-    import fastapi_tags as tg
-
     app = FastAPI()
 
     @app.get("/test", response_class=tg.TagResponse)
@@ -91,8 +86,6 @@ def test_strings_and_tag_children():
 
 
 def test_custom_name_in_response():
-    import fastapi_tags as tg
-
     app = FastAPI()
 
     def Card(sentence):
@@ -113,8 +106,6 @@ def test_custom_name_in_response():
 
 
 def test_TagResponse_with_layout_strings():
-    import fastapi_tags as tg
-
     class CustomLayoutResponse(tg.TagResponse):
         def render(self, content: Any) -> bytes:
             content = super().render(content)
@@ -140,8 +131,6 @@ def test_TagResponse_with_layout_strings():
 
 
 def test_TagResponse_with_layout_names():
-    import fastapi_tags as tg
-
     class CustomLayoutResponse(tg.TagResponse):
         def render(self, content: Any) -> bytes:
             content = super().render(content).decode("utf-8")
@@ -166,7 +155,6 @@ def test_TagResponse_with_layout_names():
 
 def test_is_htmx():
     """Test the is_htmx method, which only works if the response is wrapped."""
-    import fastapi_tags as tg
 
     app = FastAPI()
 

@@ -45,3 +45,8 @@ bugs = "https://github.com/pydanny/fastapi-tags/issues"
 
 [tool.mypy]
 exclude = "^build/"
+
+[tool.coverage.run]
+omit = [
+    "tests/*",
+]
