@@ -167,13 +167,13 @@ wheels = [
 
 [[package]]
 name = "fastapi-tags"
-version = "0.2.0"
+version = "0.4.0"
 source = { virtual = "." }
 dependencies = [
     { name = "fastapi" },
 ]
 
-[package.dev-dependencies]
+[package.optional-dependencies]
 dev = [
     { name = "coverage" },
     { name = "httpx" },
@@ -184,17 +184,16 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "fastapi", specifier = ">=0.115.12" }]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "coverage", specifier = ">=7.8.2" },
-    { name = "httpx", specifier = ">=0.28.1" },
-    { name = "ipdb", specifier = ">=0.13.13" },
-    { name = "mypy", specifier = ">=1.16.0" },
-    { name = "pytest", specifier = ">=8.4.0" },
-    { name = "ruff", specifier = ">=0.11.13" },
+requires-dist = [
+    { name = "coverage", marker = "extra == 'dev'", specifier = ">=7.8.2" },
+    { name = "fastapi", specifier = ">=0.115.12" },
+    { name = "httpx", marker = "extra == 'dev'", specifier = ">=0.28.1" },
+    { name = "ipdb", marker = "extra == 'dev'", specifier = ">=0.13.13" },
+    { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.16.0" },
+    { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.4.0" },
+    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.11.13" },
 ]
+provides-extras = ["dev"]
 
 [[package]]
 name = "h11"
