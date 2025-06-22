@@ -29,7 +29,7 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
 ]
 
-[dependency-groups]
+[project.optional-dependencies]
 dev = [
     "coverage>=7.8.2",
     "httpx>=0.28.1",
