@@ -86,8 +86,8 @@ def test_special_attributes():
 
 def test_raw_html_basic():
     """Test basic RawHTML rendering without escaping."""
-    raw = tg.RawHTML('<strong>Bold</strong> & <em>italic</em>')
-    assert raw.render() == '<strong>Bold</strong> & <em>italic</em>'
+    raw = tg.RawHTML("<strong>Bold</strong> & <em>italic</em>")
+    assert raw.render() == "<strong>Bold</strong> & <em>italic</em>"
 
 
 def test_raw_html_with_script():
@@ -96,10 +96,11 @@ def test_raw_html_with_script():
     assert raw.render() == '<script>alert("XSS")</script>'
     # This test documents the security risk
 
+
 def test_raw_html_invalid_args():
     """Test that RawHTML raises errors with invalid arguments."""
     try:
-        tg.RawHTML('first', 'second')
+        tg.RawHTML("first", "second")
         assert False, "Expected ValueError"
     except ValueError as e:
         assert "RawHTML accepts only one string argument" in str(e)
@@ -116,7 +117,8 @@ def test_raw_html_invalid_args():
     except TypeError as e:
         assert "RawHTML only accepts string content" in str(e)
 
+
 def test_raw_html_ignores_kwargs():
     """Test that RawHTML ignores keyword arguments."""
-    raw = tg.RawHTML('<div>Test</div>', id="ignored", cls="also-ignored")
-    assert raw.render() == '<div>Test</div>'
+    raw = tg.RawHTML("<div>Test</div>", id="ignored", cls="also-ignored")
+    assert raw.render() == "<div>Test</div>"
