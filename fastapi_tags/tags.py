@@ -50,9 +50,6 @@ class Tag:
 
     @cached_property
     def children(self):
-        # Probably not needed
-        # if isinstance(self._children, str | Tag):
-        #     return self._children
         return "".join(
             [c.render() if isinstance(c, Tag) else c for c in self._children]
         )
@@ -66,8 +63,6 @@ class CaseTag(Tag):
 
     @property
     def name(self) -> str:
-        if not self._name:
-            return self._name
         return self._name[0].lower() + self._name[1:]
 
 
@@ -77,8 +72,24 @@ class CaseTag(Tag):
 class Html(Tag):
     """Defines the root of an HTML document"""
 
+    def __init__(self, *children, headers: tuple | None = (), **kwargs):
+        super().__init__(*children, **kwargs)
+        self._headers = headers
+
+    @property
+    def headers(self):
+        return "".join([c.render() if isinstance(c, Tag) else c for c in self._headers])
+
     def render(self) -> str:
-        return f"<!doctype html><html{self.attrs}>{self.children}</html>"
+        return f"""<!doctype html><html{self.attrs}><head>{self.headers}</head><body>{self.children}</body></html>"""
+
+
+class Htmx(Html):
+    def __init__(self, *children, headers: tuple | None = (), **kwargs):
+        super().__init__(*children, **kwargs)
+        self._headers = (
+            Script(src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.5/dist/htmx.min.js"),
+        ) + headers  # type: ignore[operator]
 
 
 # Stock tags
