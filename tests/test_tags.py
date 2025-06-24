@@ -122,3 +122,11 @@ def test_raw_html_ignores_kwargs():
     """Test that RawHTML ignores keyword arguments."""
     raw = tg.RawHTML("<div>Test</div>", id="ignored", cls="also-ignored")
     assert raw.render() == "<div>Test</div>"
+
+
+def test_htmx_render():
+    html = tg.Htmx(tg.P("Hello, world")).render()
+    assert (
+        html
+        == '<!doctype html><html><head><script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.5/dist/htmx.min.js"></script></head><body><p>Hello, world</p></body></html>'
+    )

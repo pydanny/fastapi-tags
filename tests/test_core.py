@@ -64,7 +64,7 @@ def test_TagResponse_html():
     assert response.headers["content-type"] == "text/html; charset=utf-8"
     assert (
         response.text
-        == "<!doctype html><html><main><h1>Hello, clean HTML response!</h1><p>This is a paragraph in the response.</p></main></html>"
+        == "<!doctype html><html><head></head><body><main><h1>Hello, clean HTML response!</h1><p>This is a paragraph in the response.</p></main></body></html>"
     )
 
 
@@ -81,7 +81,7 @@ def test_strings_and_tag_children():
     assert response.headers["content-type"] == "text/html; charset=utf-8"
     assert (
         response.text
-        == "<!doctype html><html><p>This isn't a <strong>cut off</strong> sentence</p></html>"
+        == "<!doctype html><html><head></head><body><p>This isn't a <strong>cut off</strong> sentence</p></body></html>"
     )
 
 
@@ -149,7 +149,7 @@ def test_TagResponse_with_layout_names():
     assert response.headers["content-type"] == "text/html; charset=utf-8"
     assert (
         response.text
-        == "<!doctype html><html><main><h1>Hello, World!</h1></main></html>"
+        == "<!doctype html><html><head></head><body><main><h1>Hello, World!</h1></main></body></html>"
     )
 
 
