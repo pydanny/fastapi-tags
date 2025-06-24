@@ -1,261 +1,253 @@
-from .tags import Tag
+from .tags import CaseTag
 
 
-class SvgTag(Tag):
-    @property
-    def name(self) -> str:
-        if not self._name:
-            return self._name
-        return self._name[0].lower() + self._name[1:]
-
-
-class A(SvgTag):
+class A(CaseTag):
     pass
 
 
-class Animate(SvgTag):
+class Animate(CaseTag):
     pass
 
 
-class AnimateMotion(SvgTag):
+class AnimateMotion(CaseTag):
     pass
 
 
-class AnimateTransform(SvgTag):
+class AnimateTransform(CaseTag):
     pass
 
 
-class Circle(SvgTag):
+class Circle(CaseTag):
     pass
 
 
-class ClipPath(SvgTag):
+class ClipPath(CaseTag):
     pass
 
 
-class Defs(SvgTag):
+class Defs(CaseTag):
     pass
 
 
-class Desc(SvgTag):
+class Desc(CaseTag):
     pass
 
 
-class Ellipse(SvgTag):
+class Ellipse(CaseTag):
     pass
 
 
-class FeBlend(SvgTag):
+class FeBlend(CaseTag):
     pass
 
 
-class FeColorMatrix(SvgTag):
+class FeColorMatrix(CaseTag):
     pass
 
 
-class FeComponentTransfer(SvgTag):
+class FeComponentTransfer(CaseTag):
     pass
 
 
-class FeComposite(SvgTag):
+class FeComposite(CaseTag):
     pass
 
 
-class FeConvolveMatrix(SvgTag):
+class FeConvolveMatrix(CaseTag):
     pass
 
 
-class FeDiffuseLighting(SvgTag):
+class FeDiffuseLighting(CaseTag):
     pass
 
 
-class FeDisplacementMap(SvgTag):
+class FeDisplacementMap(CaseTag):
     pass
 
 
-class FeDistantLight(SvgTag):
+class FeDistantLight(CaseTag):
     pass
 
 
-class FeDropShadow(SvgTag):
+class FeDropShadow(CaseTag):
     pass
 
 
-class FeFlood(SvgTag):
+class FeFlood(CaseTag):
     pass
 
 
-class FeFuncA(SvgTag):
+class FeFuncA(CaseTag):
     pass
 
 
-class FeFuncB(SvgTag):
+class FeFuncB(CaseTag):
     pass
 
 
-class FeFuncG(SvgTag):
+class FeFuncG(CaseTag):
     pass
 
 
-class FeFuncR(SvgTag):
+class FeFuncR(CaseTag):
     pass
 
 
-class FeGaussianBlur(SvgTag):
+class FeGaussianBlur(CaseTag):
     pass
 
 
-class FeImage(SvgTag):
+class FeImage(CaseTag):
     pass
 
 
-class FeMerge(SvgTag):
+class FeMerge(CaseTag):
     pass
 
 
-class FeMergeNode(SvgTag):
+class FeMergeNode(CaseTag):
     pass
 
 
-class FeMorphology(SvgTag):
+class FeMorphology(CaseTag):
     pass
 
 
-class FeOffset(SvgTag):
+class FeOffset(CaseTag):
     pass
 
 
-class FePointLight(SvgTag):
+class FePointLight(CaseTag):
     pass
 
 
-class FeSpecularLighting(SvgTag):
+class FeSpecularLighting(CaseTag):
     pass
 
 
-class FeSpotLight(SvgTag):
+class FeSpotLight(CaseTag):
     pass
 
 
-class FeTile(SvgTag):
+class FeTile(CaseTag):
     pass
 
 
-class FeTurbulence(SvgTag):
+class FeTurbulence(CaseTag):
     pass
 
 
-class Filter(SvgTag):
+class Filter(CaseTag):
     pass
 
 
-class ForeignObject(SvgTag):
+class ForeignObject(CaseTag):
     pass
 
 
-class G(SvgTag):
+class G(CaseTag):
     pass
 
 
-class Image(SvgTag):
+class Image(CaseTag):
     pass
 
 
-class Line(SvgTag):
+class Line(CaseTag):
     pass
 
 
-class LinearGradient(SvgTag):
+class LinearGradient(CaseTag):
     pass
 
 
-class Marker(SvgTag):
+class Marker(CaseTag):
     pass
 
 
-class Mask(SvgTag):
+class Mask(CaseTag):
     pass
 
 
-class Metadata(SvgTag):
+class Metadata(CaseTag):
     pass
 
 
-class Mpath(SvgTag):
+class Mpath(CaseTag):
     pass
 
 
-class Path(SvgTag):
+class Path(CaseTag):
     pass
 
 
-class Pattern(SvgTag):
+class Pattern(CaseTag):
     pass
 
 
-class Polygon(SvgTag):
+class Polygon(CaseTag):
     pass
 
 
-class Polyline(SvgTag):
+class Polyline(CaseTag):
     pass
 
 
-class RadialGradient(SvgTag):
+class RadialGradient(CaseTag):
     pass
 
 
-class Rect(SvgTag):
+class Rect(CaseTag):
     pass
 
 
-class Script(SvgTag):
+class Script(CaseTag):
     pass
 
 
-class Set(SvgTag):
+class Set(CaseTag):
     pass
 
 
-class Stop(SvgTag):
+class Stop(CaseTag):
     pass
 
 
-class Style(SvgTag):
+class Style(CaseTag):
     pass
 
 
-class Svg(SvgTag):
+class Svg(CaseTag):
     pass
 
 
-class Switch(SvgTag):
+class Switch(CaseTag):
     pass
 
 
-class Symbol(SvgTag):
+class Symbol(CaseTag):
     pass
 
 
-class Text(SvgTag):
+class Text(CaseTag):
     pass
 
 
-class TextPath(SvgTag):
+class TextPath(CaseTag):
     pass
 
 
-class Title(SvgTag):
+class Title(CaseTag):
     pass
 
 
-class Tspan(SvgTag):
+class Tspan(CaseTag):
     pass
 
 
-class Use(SvgTag):
+class Use(CaseTag):
     pass
 
 
-class View(SvgTag):
+class View(CaseTag):
     pass

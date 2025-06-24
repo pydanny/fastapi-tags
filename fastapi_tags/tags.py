@@ -61,6 +61,16 @@ class Tag:
         return f"<{self.name}{self.attrs}>{self.children}</{self.name}>"
 
 
+class CaseTag(Tag):
+    """This is for case-sensitive tags like those used in SVG generation."""
+
+    @property
+    def name(self) -> str:
+        if not self._name:
+            return self._name
+        return self._name[0].lower() + self._name[1:]
+
+
 # Special tags
 
 
