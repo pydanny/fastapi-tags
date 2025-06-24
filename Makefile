@@ -29,6 +29,7 @@ coverage:
 	@:	
 
 build:
+	rm -rf build
 	rm -rf dist
 	uv build
 
