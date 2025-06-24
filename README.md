@@ -112,3 +112,19 @@ async def card():
     <footer>by various contributors</footer>
 </article>
 ```
+
+## Raw HTML Content
+
+For cases where you need to render raw HTML:
+
+```python
+from fastapi_tags import RawHTML
+
+# Render raw HTML content
+raw_content = RawHTML('<strong>Bold text</strong> and <em>italic</em>')
+
+# Note: RawHTML only accepts a single string argument
+# For multiple elements, combine them first:
+html_string = '<p>First</p><p>Second</p>'
+raw = RawHTML(html_string)
+```
