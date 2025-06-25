@@ -1,0 +1,14 @@
+site_name: FastAPI-Tags
+site_url: https://pydanny.github.io/fastapi-tags/
+
+theme:
+  name: material
+
+plugins:
+  - search
+
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - toc:
+      permalink: true
