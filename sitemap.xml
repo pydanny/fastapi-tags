@@ -4,4 +4,16 @@
          <loc>https://pydanny.github.io/fastapi-tags/</loc>
          <lastmod>2025-06-25</lastmod>
     </url>
+    <url>
+         <loc>https://pydanny.github.io/fastapi-tags/api/core/</loc>
+         <lastmod>2025-06-25</lastmod>
+    </url>
+    <url>
+         <loc>https://pydanny.github.io/fastapi-tags/api/svg/</loc>
+         <lastmod>2025-06-25</lastmod>
+    </url>
+    <url>
+         <loc>https://pydanny.github.io/fastapi-tags/api/tags/</loc>
+         <lastmod>2025-06-25</lastmod>
+    </url>
 </urlset>
